@@ -1,0 +1,8 @@
+.app {
+  height: 100vh;
+  width: 100vw;
+  display: grid;
+
+  grid-template-rows: none;
+  grid-template-columns: repeat(3, 1fr);
+}
