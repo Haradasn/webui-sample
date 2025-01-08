@@ -1,10 +1,9 @@
 import { useEffect, useRef } from "react";
-import { useAtomValue } from "jotai";
-import { lastCamAtom } from "../../state/msg";
+import { useCam } from "../../state/msg";
 import style from "./Camera.module.css";
 
 export const Camera = () => {
-  const camera = useAtomValue(lastCamAtom);
+  const camera = useCam();
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {

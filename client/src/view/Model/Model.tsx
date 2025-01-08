@@ -1,16 +1,15 @@
 import { FC } from "react";
-import { useAtomValue } from "jotai";
 
 import { Canvas, Quaternion, Vector3 } from "@react-three/fiber";
 import { CameraControls, Line, PerspectiveCamera } from "@react-three/drei";
 import { BoxGeometry } from "three";
 
-import { lastCarAtom, lastModelAtom } from "../../state/msg";
 import { BBox, Path, Road } from "../../type/msg";
+import { useCar, useModel } from "../../state/msg";
 
 export const Model: FC = () => {
-  const model = useAtomValue(lastModelAtom);
-  const car = useAtomValue(lastCarAtom);
+  const model = useModel();
+  const car = useCar();
 
   return (
     <Canvas>

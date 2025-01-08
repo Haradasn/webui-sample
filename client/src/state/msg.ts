@@ -1,17 +1,20 @@
 import { useEffect } from "react";
-import { atom, useSetAtom } from "jotai";
+import { atom, useAtomValue, useSetAtom } from "jotai";
 import socketIOClient from "socket.io-client";
-
 import { Msg, Camera, Car, Model } from "../type/msg";
 
-export const lastCamAtom = atom<Camera | null>(null);
-export const lastCarAtom = atom<Car | null>(null);
-export const lastModelAtom = atom<Model | null>(null);
+const lastCamState = atom<Camera | null>(null);
+const lastCarState = atom<Car | null>(null);
+const lastModelState = atom<Model | null>(null);
+
+export const useCam = () => useAtomValue(lastCamState);
+export const useCar = () => useAtomValue(lastCarState);
+export const useModel = () => useAtomValue(lastModelState);
 
 export const useSocketIO = (url: string) => {
-  const setLastCar = useSetAtom(lastCarAtom);
-  const setLastCam = useSetAtom(lastCamAtom);
-  const setLastModel = useSetAtom(lastModelAtom);
+  const setLastCar = useSetAtom(lastCarState);
+  const setLastCam = useSetAtom(lastCamState);
+  const setLastModel = useSetAtom(lastModelState);
 
   useEffect(() => {
     const socket = socketIOClient(url);
@@ -40,5 +43,5 @@ export const useSocketIO = (url: string) => {
       socket.off("monitoringResult");
       socket.disconnect();
     };
-  }, [url]);
+  }, [setLastCam, setLastCar, setLastModel, url]);
 };
