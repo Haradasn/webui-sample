@@ -1,16 +1,16 @@
 import { useState, useEffect } from "react";
-import { useRecoilValue } from "recoil";
+import { useAtomValue } from "jotai";
 
 import { Map, MapStyle, NavigationControl } from "react-map-gl/maplibre";
 import { Marker } from "react-map-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import mapStyle from "./styles/dark.json"; // Edit map style on [Maputnik](https://maputnik.github.io/editor)
 
-import { lastCarState } from "../../state/msg";
+import { lastCarAtom } from "../../state/msg";
 import style from "./Nav.module.css";
 
 export const Nav = () => {
-  const car = useRecoilValue(lastCarState);
+  const car = useAtomValue(lastCarAtom);
 
   const [track, setTrack] = useState(true);
 

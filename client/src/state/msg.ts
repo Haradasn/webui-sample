@@ -1,28 +1,17 @@
 import { useEffect } from "react";
-import { atom, useSetRecoilState } from "recoil";
+import { atom, useSetAtom } from "jotai";
 import socketIOClient from "socket.io-client";
 
 import { Msg, Camera, Car, Model } from "../type/msg";
 
-export const lastCamState = atom<Camera | null>({
-  key: "lastCam",
-  default: null,
-});
-
-export const lastCarState = atom<Car | null>({
-  key: "lastCar",
-  default: null,
-});
-
-export const lastModelState = atom<Model | null>({
-  key: "lastModel",
-  default: null,
-});
+export const lastCamAtom = atom<Camera | null>(null);
+export const lastCarAtom = atom<Car | null>(null);
+export const lastModelAtom = atom<Model | null>(null);
 
 export const useSocketIO = (url: string) => {
-  const setLastCar = useSetRecoilState(lastCarState);
-  const setLastCam = useSetRecoilState(lastCamState);
-  const setLastModel = useSetRecoilState(lastModelState);
+  const setLastCar = useSetAtom(lastCarAtom);
+  const setLastCam = useSetAtom(lastCamAtom);
+  const setLastModel = useSetAtom(lastModelAtom);
 
   useEffect(() => {
     const socket = socketIOClient(url);
