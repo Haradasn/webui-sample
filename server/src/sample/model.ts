@@ -21,7 +21,7 @@ export const models: Model[] = Array.from({ length: 100 }).map((_, t) => {
     y: i - 5,
     z: 0,
   }));
-  const car_pos = { x: Math.sin(t / 4) * 0.5, y: 5, z: 1 };
+  const car_pos = { x: Math.sin(t / 4) * 0.5, y: 8, z: 1 };
   const car_rot = -(Math.cos(t / 4) * Math.PI) / 16;
   return {
     path: path,

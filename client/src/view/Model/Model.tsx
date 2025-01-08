@@ -42,8 +42,24 @@ const EgoCar: FC<{ leftBlinker?: boolean; rightBlinker?: boolean }> = ({
   leftBlinker,
   rightBlinker,
 }) => {
-  const a = leftBlinker && rightBlinker;
-  return <>{a}</>;
+  return (
+    <mesh position={[0, 0, 1]}>
+      <boxGeometry args={[2, 4, 2]} />
+      <meshStandardMaterial color="gray" />
+      {leftBlinker && (
+        <mesh position={[-0.75, -2, 0]}>
+          <boxGeometry args={[0.5, 0.1, 0.1]} />
+          <meshStandardMaterial color="orange" />
+        </mesh>
+      )}
+      {rightBlinker && (
+        <mesh position={[0.75, -2, 0]}>
+          <boxGeometry args={[0.5, 0.1, 0.1]} />
+          <meshStandardMaterial color="orange" />
+        </mesh>
+      )}
+    </mesh>
+  );
 };
 
 const PathView: FC<{ path: Path }> = ({ path }) => {
