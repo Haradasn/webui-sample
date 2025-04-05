@@ -24,9 +24,18 @@ io.on("connection", (socket) => {
 let idx_cam = 0;
 setInterval(() => {
   const camera = cameras.at(idx_cam);
-  if (camera) io.emit("msg", { kind: "camera", data: camera } as Msg);
-  idx_cam = (idx_cam + 1) % 10;
+
+  if (camera && camera.jpeg) {
+    const cameraClone = structuredClone(camera);
+    io.emit("msg", { kind: "camera", data: cameraClone } as Msg);
+    console.log(`📷 Sent camera id=${camera.id}, size=${(camera.jpeg as ArrayBuffer).byteLength} bytes`);
+  } else {
+    console.warn(`⚠️ camera or jpeg is missing at idx_cam=${idx_cam}`);
+  }
+
+  idx_cam = (idx_cam + 1) % cameras.length;
 }, 1000);
+
 
 let idx_car = 0;
 setInterval(() => {
