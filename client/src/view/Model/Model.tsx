@@ -32,8 +32,8 @@ export const Model: FC = () => {
         rightBlinker={car?.blinker.right}
       />
       {model && <PathView path={model.path} />}
-      {model && model.bbox.map((bbox) => <BBoxView bbox={bbox} />)}
-      {model && model.road.map((road) => <RoadView road={road} />)}
+      {model && model.bbox.map((bbox,i) => <BBoxView key={i} bbox={bbox} />)}
+      {model && model.road.map((road,i) => <RoadView key={i} road={road} />)}
     </Canvas>
   );
 };
